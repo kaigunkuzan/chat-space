@@ -7,31 +7,33 @@
 |nickname|string|null: false,index: true|
 ### Association
 - has_many :tweets
-- has_many :groups, through:  ;groups_users
+- has_many :groups, through:  :groups_users
+- has_many :groups_users
 ## tweetsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |image|text||
 |text|text||
-|user_id|integer|null: false,foreign_key: true|
-|group_id|integer|null: false,foreign_key: true|
+|user|references|null: false,foreign_key: true|
+|group|references|null: false,foreign_key: true|
 ### Association
 - belongs_to :user
-- has_many :groups
+- belongs_to :group
 
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|text|null: false|
+|name|string|null: false|
 ### Association
 - has_many :tweets
-- has_many :users, through:  ;groups_users
+- has_many :users, through:  :groups_users
+- has_many :groups_users
 ## groups_usersテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|group|refereces|null: false, foreign_key: true|
 
 ### Association
-- has_many :groups
-- has_many :users
+- belongs_to :group
+- belongs_to :user
